@@ -29,6 +29,7 @@ class CreateAddUserAndWallets < ActiveRecord::Migration[8.0]
       t.bigint :base_currency, null: false
       t.bigint :quote_currency, null: false
       t.integer :volume, null: false
+      t.float :price, null: false
 
       t.timestamps
     end

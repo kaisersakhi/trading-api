@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_07_100202) do
     t.bigint "base_currency", null: false
     t.bigint "quote_currency", null: false
     t.integer "volume", null: false
+    t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"

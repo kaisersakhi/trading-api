@@ -5,12 +5,17 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def verify_request
-    token = request.headers["Authorization"]&.split(" ")&.last
+    # binding.irb
+    token = request.headers["AUTHORIZATION"]&.split(" ")&.last
 
     begin
-      deocded = JWT.decode(token, Rails.application.credentials.jwt_secret, true, algorithm: "HS256")[0]
+      decoded = JWT.decode(token, Rails.application.credentials.jwt_secret, true, algorithm: "HS256")[0]
 
-      @current_user = User.find(deocded[:user_id])
+      if Time.at(decoded["exp"]) <= Time.current
+        render json: { error: "Token expired" }, status: :unauthorized
+      end
+
+      @current_user = User.find(decoded["user_id"])
 
     rescue JWT::DecodeError
       render json: { error: "Not Authorized" }, status: :unauthorized

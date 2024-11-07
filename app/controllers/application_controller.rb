@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def verify_request
-    # binding.irb
     token = request.headers["AUTHORIZATION"]&.split(" ")&.last
 
     begin

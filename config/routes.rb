@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   post "/order/create", to: "orders#create"
   put "/order/cancel", to: "orders#cancel"
+
+  get "/dashboard", to: "dashboard#index"
 end
